@@ -2,35 +2,35 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/fi
 import { db } from "./firebase.js";
 
 window.addEventListener('DOMContentLoaded', () => {
-    const formularioTiendaStarbucks = document.querySelector('#Formulario-TiendaStarbucks');
+    const formularioSombrero = document.querySelector('#Formulario-Sombrero');
 
-    formularioTiendaStarbucks.addEventListener('submit', async (e) => {
+    formularioSombrero.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const NOMBRE = formularioTiendaStarbucks['Nombre-Tienda'].value;
-        const UBICACION = formularioTiendaStarbucks['Ubicacion-Tienda'].value;
-        const CANTIDAD_MESAS = parseInt(formularioTiendaStarbucks['CantidadMesas-Tienda'].value);
-        const GERENTE = formularioTiendaStarbucks['Gerente-Tienda'].value;
-        const FECHA_APERTURA = formularioTiendaStarbucks['FechaApertura-Tienda'].value;
+        const NOMBRE = formularioSombrero['Nombre-Sombrero'].value;
+        const TIPO = formularioSombrero['Tipo-Sombrero'].value;
+        const COLOR = formularioSombrero['Color-Sombrero'].value;
+        const TAMAÑO = parseInt(formularioSombrero['Tamaño-Sombrero'].value);
+        const FECHA_FABRICACION = formularioSombrero['FechaFabricacion-Sombrero'].value;
 
         try {
             // Utiliza addDoc para agregar un documento con un identificador generado automáticamente
-            const nuevaTiendaRef = await addDoc(collection(db, 'Starbucks'), {
+            const nuevoSombreroRef = await addDoc(collection(db, 'Sombreros'), {
                 Nombre: NOMBRE,
-                Ubicacion: UBICACION,
-                CantidadMesas: CANTIDAD_MESAS,
-                Gerente: GERENTE,
-                FechaApertura: FECHA_APERTURA
+                Tipo: TIPO,
+                Color: COLOR,
+                Tamaño: TAMAÑO,
+                FechaFabricacion: FECHA_FABRICACION
             });
 
             // Muestra un mensaje si todo sale bien
-            alert(`La tienda de Starbucks ${NOMBRE} ha sido registrada exitosamente`);
+            alert(`El sombrero ${NOMBRE} ha sido registrado exitosamente`);
 
             // Limpia el formulario
-            formularioTiendaStarbucks.reset();
+            formularioSombrero.reset();
         } catch (error) {
             // Maneja el error y muestra un mensaje con el error
-            alert('Error al registrar la tienda de Starbucks:', 'noValido');
+            alert('Error al registrar el sombrero:', 'noValido');
         }
     });
 });

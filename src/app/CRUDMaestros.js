@@ -1,106 +1,106 @@
 import { deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 import { db } from "./firebase.js";
 
-const TiendasStarbucks = document.querySelector('.TiendasStarbucks');
-const FormularioActualizarTienda = document.querySelector('#Formulario-ActualizarTienda');
+const Sombreros = document.querySelector('.Sombreros');
+const FormularioActualizarSombrero = document.querySelector('#Formulario-ActualizarSombrero');
 
-const obtenerTienda = (id) => getDoc(doc(db, 'Starbucks', id));
+const obtenerSombrero = (id) => getDoc(doc(db, 'Sombreros', id));
 
 let id = '';
 
-// Nueva función para actualizar tienda
-const actualizarTienda = async (id, nuevosValores) => {
+// Nueva función para actualizar sombrero
+const actualizarSombrero = async (id, nuevosValores) => {
     try {
-        await updateDoc(doc(db, 'Starbucks', id), nuevosValores);
-        alert('Tienda de Starbucks actualizada correctamente');
+        await updateDoc(doc(db, 'Sombreros', id), nuevosValores);
+        alert('Sombrero actualizado correctamente');
     } catch (error) {
-        alert('Error al actualizar la tienda de Starbucks', 'error');
+        alert('Error al actualizar el sombrero', 'error');
     }
 };
 
-export const MostrarListaTiendasStarbucks = (Datos) => {
+export const MostrarListaSombreros = (Datos) => {
     if (Datos.length) {
         let html = '';
         Datos.forEach(documento => {
-            const TiendaStarbucks = documento.data();
+            const Sombrero = documento.data();
             const idDocumento = documento.id; // Obtén el identificador del documento
             const li = `
                 <li class="list-group-item list-group-item-action">
-                    <h5> Nombre de la tienda: ${TiendaStarbucks.Nombre} </h5>
-                    <p> Ubicación: ${TiendaStarbucks.Ubicacion} </p>
-                    <p> Cantidad de Mesas: ${TiendaStarbucks.CantidadMesas} </p>
-                    <p> Gerente: ${TiendaStarbucks.Gerente} </p>
-                    <p> Fecha de Apertura: ${TiendaStarbucks.FechaApertura} </p>
-                    <button class="btn btn-outline-warning w-100 mb-2 botoneSinSesion Eliminar-TiendaStarbucks" data-id="${idDocumento}"> Eliminar </button>
-                    <button class="btn btn-outline-success w-100 mb-2 botoneSinSesion Actualizar-TiendaStarbucks" data-id="${idDocumento}" data-bs-toggle="modal" data-bs-target="#ActualizarTiendaStarbucks"> Actualizar </button>
+                    <h5> Nombre del sombrero: ${Sombrero.Nombre} </h5>
+                    <p> Tipo: ${Sombrero.Tipo} </p>
+                    <p> Color: ${Sombrero.Color} </p>
+                    <p> Tamaño: ${Sombrero.Tamaño} </p>
+                    <p> Fecha de Fabricación: ${Sombrero.FechaFabricacion} </p>
+                    <button class="btn btn-outline-warning w-100 mb-2 botoneSinSesion Eliminar-Sombrero" data-id="${idDocumento}"> Eliminar </button>
+                    <button class="btn btn-outline-success w-100 mb-2 botoneSinSesion Actualizar-Sombrero" data-id="${idDocumento}" data-bs-toggle="modal" data-bs-target="#ActualizarSombrero"> Actualizar </button>
                 </li>
             `;
             html += li;
         });
-        TiendasStarbucks.innerHTML = html;
+        Sombreros.innerHTML = html;
 
-        const BotonesEliminar = TiendasStarbucks.querySelectorAll('.Eliminar-TiendaStarbucks');
+        const BotonesEliminar = Sombreros.querySelectorAll('.Eliminar-Sombrero');
 
-        // ELIMINAR TIENDAS DE STARBUCKS
+        // ELIMINAR SOMBREROS
         BotonesEliminar.forEach(BotonEliminarIndividual => {
             BotonEliminarIndividual.addEventListener('click', async (event) => {
                 const Documento = event.target.dataset.id;
                 try {
-                    await deleteDoc(doc(db, 'Starbucks', Documento));
+                    await deleteDoc(doc(db, 'Sombreros', Documento));
                     // Puedes agregar aquí algún código adicional después de eliminar el documento, si es necesario
                 } catch (error) {
-                    alert('Error al eliminar la tienda de Starbucks:', 'error');
+                    alert('Error al eliminar el sombrero:', 'error');
                 }
             });
         });
 
-        const BotonesActualizar = TiendasStarbucks.querySelectorAll('.Actualizar-TiendaStarbucks');
+        const BotonesActualizar = Sombreros.querySelectorAll('.Actualizar-Sombrero');
 
         BotonesActualizar.forEach(BotonActualizarIndividual => {
             BotonActualizarIndividual.addEventListener('click', async (e) => {
-                const identificadorDocumento = await obtenerTienda(e.target.dataset.id);
+                const identificadorDocumento = await obtenerSombrero(e.target.dataset.id);
 
                 // Accede a los datos del documento utilizando el método data()
                 const DATOSDOCUMENTO = identificadorDocumento.data();
 
                 // Ahora puedes acceder a las propiedades del documento
-                const NOMBRE = FormularioActualizarTienda['Actualizar-Nombre'];
-                const UBICACION = FormularioActualizarTienda['Actualizar-Ubicacion'];
-                const CANTIDAD_MESAS = FormularioActualizarTienda['Actualizar-CantidadMesas'];
-                const GERENTE = FormularioActualizarTienda['Actualizar-Gerente'];
-                const FECHA_APERTURA = FormularioActualizarTienda['Actualizar-FechaApertura'];
+                const NOMBRE = FormularioActualizarSombrero['Actualizar-Nombre'];
+                const TIPO = FormularioActualizarSombrero['Actualizar-Tipo'];
+                const COLOR = FormularioActualizarSombrero['Actualizar-Color'];
+                const TAMAÑO = FormularioActualizarSombrero['Actualizar-Tamaño'];
+                const FECHA_FABRICACION = FormularioActualizarSombrero['Actualizar-FechaFabricacion'];
 
                 NOMBRE.value = DATOSDOCUMENTO.Nombre;
-                UBICACION.value = DATOSDOCUMENTO.Ubicacion;
-                CANTIDAD_MESAS.value = DATOSDOCUMENTO.CantidadMesas;
-                GERENTE.value = DATOSDOCUMENTO.Gerente;
-                FECHA_APERTURA.value = DATOSDOCUMENTO.FechaApertura;
+                TIPO.value = DATOSDOCUMENTO.Tipo;
+                COLOR.value = DATOSDOCUMENTO.Color;
+                TAMAÑO.value = DATOSDOCUMENTO.Tamaño;
+                FECHA_FABRICACION.value = DATOSDOCUMENTO.FechaFabricacion;
 
                 id = identificadorDocumento.id;
             });
         });
 
-        // Evento para actualizar la tienda de Starbucks al enviar el formulario
-        FormularioActualizarTienda.addEventListener('submit', async (e) => {
+        // Evento para actualizar el sombrero al enviar el formulario
+        FormularioActualizarSombrero.addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
                 // Validar campos aquí si es necesario
-                const NOMBRE = FormularioActualizarTienda['Actualizar-Nombre'].value;
-                const UBICACION = FormularioActualizarTienda['Actualizar-Ubicacion'].value;
-                const CANTIDAD_MESAS = FormularioActualizarTienda['Actualizar-CantidadMesas'].value;
-                const GERENTE = FormularioActualizarTienda['Actualizar-Gerente'].value;
-                const FECHA_APERTURA = FormularioActualizarTienda['Actualizar-FechaApertura'].value;
+                const NOMBRE = FormularioActualizarSombrero['Actualizar-Nombre'].value;
+                const TIPO = FormularioActualizarSombrero['Actualizar-Tipo'].value;
+                const COLOR = FormularioActualizarSombrero['Actualizar-Color'].value;
+                const TAMAÑO = FormularioActualizarSombrero['Actualizar-Tamaño'].value;
+                const FECHA_FABRICACION = FormularioActualizarSombrero['Actualizar-FechaFabricacion'].value;
 
-                await actualizarTienda(id, {
+                await actualizarSombrero(id, {
                     Nombre: NOMBRE,
-                    Ubicacion: UBICACION,
-                    CantidadMesas: CANTIDAD_MESAS,
-                    Gerente: GERENTE,
-                    FechaApertura: FECHA_APERTURA,
+                    Tipo: TIPO,
+                    Color: COLOR,
+                    Tamaño: TAMAÑO,
+                    FechaFabricacion: FECHA_FABRICACION,
                 });
 
                 // Cerrar el modal (si es un modal)
-                const actualizarModal = document.querySelector('#ActualizarTiendaStarbucks');
+                const actualizarModal = document.querySelector('#ActualizarSombrero');
                 const modal = bootstrap.Modal.getInstance(actualizarModal);
                 modal.hide();
             } catch (error) {
@@ -109,7 +109,7 @@ export const MostrarListaTiendasStarbucks = (Datos) => {
         });
 
     } else if (Datos.length === 0) {
-        TiendasStarbucks.innerHTML = `
+        Sombreros.innerHTML = `
             <h1>
                 Para visualizar el contenido es necesario que inicies sesión
                 <br><br>
