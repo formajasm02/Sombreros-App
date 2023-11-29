@@ -1,0 +1,12 @@
+/* Estilo personalizado para el contenido del cuerpo */
+body {
+    background-color: #343a40;
+    /* Color de fondo oscuro */
+    color: #ffffff;
+
+    /* Texto blanco */
+    && a {
+        cursor: pointer;
+        text-decoration: none;
+    }
+}

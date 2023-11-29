@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlaza el archivo de estilo de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlaza al archivo de estilos de Toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- CSS PERSONALIZADO -->
+    <link rel="stylesheet" href="style.css">
+    <!-- El modulo Main contiene lo necesario para que el programa funcione -->
+    <script type="module" src="./mainManualidad.js"></script>
+    <title>Manualidades UTN</title>
+</head>
+
+<body>
+
+    <!-- Navbar con tema oscuro -->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">ORGANIZACIONES UNIVERSALES </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h4 class="offcanvas-title text-light" id="offcanvasNavbarLabel">Opciones</h4>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link botoneSinSesion" aria-current="page" data-bs-toggle="modal"
+                                data-bs-target="#InicioSesion">INICIAR SESION</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link botoneSinSesion" data-bs-toggle="modal"
+                                data-bs-target="#Registrarse">REGISTRARSE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link botonesConSesion" id="Mostrar-Manualidades"
+                                href="Subir Manualidades.html">REGISTRAR UNA TIENDA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link botonesConSesion" id="Mostrar-Manualidades" href="index.html">VER
+                                TIENDAS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link botonesConSesion" id="CerrarSesion">CERRAR SESIÓN</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido del cuerpo aquí -->
+
+    <!-- Formulario de Registro de Starbucks -->
+    <div class="container p-4 mt-5">
+        <div class="row">
+            <form id="Formulario-TiendaStarbucks" class="col-md-6 mx-auto">
+                <div class="mb-3">
+                    <label for="Nombre-Tienda" class="form-label">Nombre de la Tienda:</label>
+                    <input type="text" class="form-control" id="Nombre-Tienda" placeholder="Nombre de la Tienda">
+                </div>
+                <div class="mb-3">
+                    <label for="Ubicacion-Tienda" class="form-label">Ubicación de la Tienda:</label>
+                    <input type="text" class="form-control" id="Ubicacion-Tienda" placeholder="Ubicación de la Tienda">
+                </div>
+                <div class="mb-3">
+                    <label for="CantidadMesas-Tienda" class="form-label">Cantidad de Mesas:</label>
+                    <input type="number" class="form-control" id="CantidadMesas-Tienda"
+                        placeholder="Cantidad de Mesas en la Tienda">
+                </div>
+                <div class="mb-3">
+                    <label for="Gerente-Tienda" class="form-label">Gerente de la Tienda:</label>
+                    <input type="text" class="form-control" id="Gerente-Tienda" placeholder="Gerente de la Tienda">
+                </div>
+                <div class="mb-3">
+                    <label for="FechaApertura-Tienda" class="form-label">Fecha de Apertura:</label>
+                    <input type="date" class="form-control" id="FechaApertura-Tienda">
+                </div>
+                <button type="submit" class="btn btn-primary" id="Guardar-TiendaStarbucks">Guardar Tienda</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- MODAL DE INICIO DE SESION -->
+    <div class="modal fade" id="InicioSesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">INICIAR SESIÓN</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formulario-InicioSesion">
+                        <label for="email">
+                            Correo:
+                        </label>
+                        <input type="text" id="InicioSesion-Email" class="form-control mb-3"
+                            placeholder="Ingresa tu correo" required>
+                        <label for="password">
+                            Contraseña:
+                        </label>
+                        <input type="password" id="InicioSesion-Password" class="form-control mb-3"
+                            placeholder="Ingresa tu contraseña" required>
+                        <button type="submit" class="btn btn-outline-light w-100 mb-2">INICIAR SESIÓN</button>
+                    </form>
+                    <button type="submit" id="Google-Auth" class="btn btn-outline-warning w-100 mb-2">INICIAR SESIÓN CON
+                        GOOGLE</button>
+                    <button type="submit" id="Facebook-Auth" class="btn btn-outline-info w-100 mb-2">INICIAR SESIÓN CON
+                        FACEBOOK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE REGISTRO -->
+    <div class="modal fade" id="Registrarse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">REGISTRATE</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formulario-Registro">
+                        <label for="email">
+                            Correo:
+                        </label>
+                        <input type="text" id="Registrarse-Email" class="form-control mb-3"
+                            placeholder="Ingresa tu correo" required>
+                        <label for="password">
+                            Contraseña:
+                        </label>
+                        <input type="password" id="Registrarse-Password" class="form-control mb-3"
+                            placeholder="Ingresa tu contraseña" required>
+                        <button type="submit" class="btn btn-outline-light w-100 mb-4">REGISTRARSE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap y otros scripts necesarios -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts de Toastify y otros necesarios -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+
+</html>
